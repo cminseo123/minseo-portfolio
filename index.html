@@ -2,207 +2,199 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Minseo Cho | Challenger Golfer</title>
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
-        /* [1] 기본 설정 (다크모드) */
-        :root {
-            --bg-color: #121212;       /* 아주 어두운 회색 (배경) */
-            --card-bg: #1E1E1E;        /* 카드 배경 */
-            --text-main: #FFFFFF;      /* 흰색 텍스트 */
-            --text-sub: #AAAAAA;       /* 회색 텍스트 */
-            --accent: #4CAF50;         /* 골프 그린색 포인트 */
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
+        /* [1] 기본 세팅 & 배경 애니메이션 */
+        body { 
             font-family: 'Pretendard', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background: #0f0c29;
+            background: linear-gradient(to bottom, #24243e, #302b63, #0f0c29);
+            color: white;
+            overflow-x: hidden;
             min-height: 100vh;
-            padding: 2rem 1rem;
+            display: flex; flex-direction: column; align-items: center;
         }
 
-        /* [2] 프로필 섹션 */
-        .profile-section {
-            text-align: center;
-            margin-bottom: 3rem;
-            margin-top: 2rem;
-            animation: fadeIn 1s ease-in;
+        .aurora-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #121212);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--accent); /* 포인트 컬러 테두리 */
-            margin-bottom: 1rem;
-            box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
-        }
-
-        .name {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .bio {
-            color: var(--text-sub);
-            font-size: 1rem;
-            line-height: 1.6;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .keyword {
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        /* [3] 카드 그리드 섹션 (반응형) */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 화면 줄면 자동 줄바꿈 */
-            gap: 1.5rem;
-            width: 100%;
-            max-width: 1000px;
-            padding: 0 1rem;
-        }
-
-        /* 카드 디자인 */
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 16px;
-            padding: 2rem;
-            text-decoration: none;
-            color: var(--text-main);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            border: 1px solid #333;
-        }
-
-        .card:hover {
-            transform: translateY(-5px); /* 마우스 올리면 살짝 위로 */
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-            border-color: var(--accent);
-        }
-
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--accent);
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .card p {
-            color: var(--text-sub);
-            font-size: 0.9rem;
+        /* [2] 3D 글래스모피즘 효과 */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border-radius: 24px;
+            transition: all 0.3s ease;
         }
         
-        /* NEW 뱃지 스타일 추가 */
-        .badge {
-            background-color: var(--accent);
-            color: black;
-            font-size: 0.7rem;
-            font-weight: bold;
-            padding: 2px 8px;
-            border-radius: 10px;
-            margin-bottom: 10px;
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255, 255, 255, 0.1);
         }
 
-        /* [4] 푸터 */
-        footer {
-            margin-top: auto;
-            padding-top: 4rem;
-            color: #555;
-            font-size: 0.8rem;
+        /* [3] 3D 틸트 컨테이너 */
+        .tilt-container {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            width: 100%; max-width: 600px;
+            padding: 20px;
+        }
+        
+        .tilt-inner {
+            transform: rotateX(0deg) rotateY(0deg);
+            transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
         }
 
-        /* 애니메이션 효과 */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* [4] 아이콘 박스 스타일 */
+        .icon-box {
+            width: 50px; height: 50px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; color: white; margin-bottom: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
-        /* 모바일 최적화 */
-        @media (max-width: 600px) {
-            .name { font-size: 1.8rem; }
-            .grid-container { grid-template-columns: 1fr; } /* 모바일은 1줄로 */
+        /* [5] 뱃지 스타일 */
+        .new-badge {
+            position: absolute; top: 15px; right: 15px;
+            background: linear-gradient(90deg, #ff8a00, #e52e71);
+            padding: 4px 8px; border-radius: 20px;
+            font-size: 10px; font-weight: bold;
+            box-shadow: 0 0 10px rgba(229, 46, 113, 0.5);
+            animation: pulse 2s infinite;
         }
+        @keyframes pulse { 0% { opacity: 0.8; } 50% { opacity: 1; transform: scale(1.05); } 100% { opacity: 0.8; } }
     </style>
 </head>
 <body>
 
-    <header class="profile-section">
-        <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&q=80&w=150&h=150" alt="프로필 사진" class="profile-img">
-        
-        <h1 class="name">조민서 (Minseo Cho)</h1>
-        <p class="bio">
-            <span class="keyword">KPGA Pro</span> & <span class="keyword">AI Developer</span><br>
-            데이터로 스윙을 분석하고 코드로 가능성을 확장합니다.<br>
-            스포츠와 IT의 경계를 허무는 <b>Challenger Golfer</b>입니다.
-        </p>
-    </header>
+    <div class="aurora-bg"></div>
 
-    <main class="grid-container">
-        
-        <a href="https://cminseo123.github.io/golf-mbti-2/" class="card" target="_blank">
-            <span class="badge">NEW ✨</span>
-            <div class="card-icon"><i class="fa-solid fa-clipboard-question"></i></div>
-            <h3>골프 MBTI 테스트</h3>
-            <p>내 골프 성향은 공격형? 전략가?<br>재미로 보는 나의 골프 DNA 분석</p>
-        </a>
+    <div class="tilt-container" id="tiltContainer">
+        <div class="tilt-inner" id="tiltInner">
+            
+            <header class="glass-card p-8 mb-8 text-center relative overflow-hidden group">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600"></div>
+                
+                <div class="relative inline-block">
+                    <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&q=80&w=150&h=150" 
+                         alt="Profile" 
+                         class="w-32 h-32 rounded-full border-4 border-white/10 shadow-2xl object-cover mb-4 mx-auto group-hover:border-green-400 transition-colors duration-500">
+                    <div class="absolute bottom-4 right-0 bg-green-500 w-6 h-6 rounded-full border-4 border-[#1E1E1E]"></div>
+                </div>
 
-        <a href="https://huggingface.co/spaces/Cminseo/golf-analyzer" class="card" target="_blank">
-            <div class="card-icon"><i class="fa-solid fa-golf-ball-tee"></i></div>
-            <h3>골프 AI 진단</h3>
-            <p>AI가 당신의 스윙을 분석하고<br>최적의 솔루션을 제공합니다.</p>
-        </a>
+                <h1 class="text-3xl font-black mb-2 tracking-tight">조민서 <span class="text-base font-normal text-gray-400">Minseo Cho</span></h1>
+                <p class="text-sm text-gray-300 leading-relaxed font-light">
+                    <span class="text-green-400 font-bold">KPGA Pro</span> <span class="mx-1">|</span> <span class="text-blue-400 font-bold">AI Dev</span><br>
+                    데이터로 증명하는 골프,<br>코드로 혁신하는 플레이어.
+                </p>
 
-        <a href="https://cminseo123.github.io/General-Development-Glossary/" class="card" target="_blank">
-            <div class="card-icon"><i class="fa-solid fa-book-open"></i></div>
-            <h3>나만의 단어장</h3>
-            <p>직접 개발한 학습 앱으로<br>효율적인 암기를 경험하세요.</p>
-        </a>
+                <div class="mt-6 flex justify-center gap-4">
+                    <a href="https://youtube.com/@chozzigolf?si=FgtFNqmHOYADQ8rG" target="_blank" class="text-gray-400 hover:text-red-500 transition"><i class="fa-brands fa-youtube text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-pink-500 transition"><i class="fa-brands fa-instagram text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-github text-xl"></i></a>
+                </div>
+            </header>
 
-        <a href="https://youtube.com/@chozzigolf?si=FgtFNqmHOYADQ8rG" class="card" target="_blank">
-            <div class="card-icon"><i class="fa-brands fa-youtube"></i></div>
-            <h3>도전골퍼 조민서</h3>
-            <p>코딩하는 프로 골퍼의<br>좌충우돌 성장 스토리</p>
-        </a>
+            <main class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-        <a href="tetris.html" class="card" target="_blank">
-    <span class="badge" style="background-color: #F538FF; color: white;">PLAY 🎮</span>
-    <div class="card-icon"><i class="fa-solid fa-gamepad"></i></div>
-    <h3>심심풀이 테트리스</h3>
-    <p>파이썬으로 배우고<br>웹으로 구현한 미니 게임!</p>
-    
-</a>
+                <a href="https://cminseo123.github.io/golf-mbti-2/" target="_blank" class="glass-card p-6 relative flex flex-col items-start group hover:bg-white/5">
+                    <span class="new-badge">HOT 🔥</span>
+                    <div class="icon-box bg-gradient-to-br from-green-400 to-emerald-600">
+                        <i class="fa-solid fa-clipboard-question"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-1 group-hover:text-green-400 transition">골프 MBTI</h3>
+                    <p class="text-xs text-gray-400">내 골프 스타일은 공격형? 전략가?<br>데이터 기반 성향 분석</p>
+                </a>
 
-    </main>
+                <a href="https://huggingface.co/spaces/Cminseo/golf-analyzer" target="_blank" class="glass-card p-6 relative flex flex-col items-start group hover:bg-white/5">
+                    <div class="icon-box bg-gradient-to-br from-blue-500 to-indigo-600">
+                        <i class="fa-solid fa-golf-ball-tee"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-1 group-hover:text-blue-400 transition">AI 스윙 진단</h3>
+                    <p class="text-xs text-gray-400">인공지능이 분석하는 나의 스윙.<br>최적의 솔루션을 찾아보세요.</p>
+                </a>
 
-    <footer>
-        © 2026 Minseo Cho. All rights reserved.
-    </footer>
+                <a href="arcade.html" target="_blank" class="glass-card p-6 relative flex flex-col items-start group hover:bg-white/5">
+                    <span class="new-badge" style="background: linear-gradient(90deg, #ec4899, #8b5cf6);">DATE 💘</span>
+                    <div class="icon-box bg-gradient-to-br from-pink-500 to-purple-600">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-1 group-hover:text-pink-400 transition">시크릿 아케이드</h3>
+                    <p class="text-xs text-gray-400">썸 탈 때 필수! 대화카드 & 룰렛.<br>재밌는 미니게임 모음집</p>
+                </a>
 
+                <a href="https://cminseo123.github.io/General-Development-Glossary/" target="_blank" class="glass-card p-6 relative flex flex-col items-start group hover:bg-white/5">
+                    <div class="icon-box bg-gradient-to-br from-orange-400 to-red-500">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-1 group-hover:text-orange-400 transition">Dev 단어장</h3>
+                    <p class="text-xs text-gray-400">직접 개발한 학습 용어집.<br>효율적인 암기를 위한 도구</p>
+                </a>
+
+                <a href="https://youtube.com/@chozzigolf?si=FgtFNqmHOYADQ8rG" target="_blank" class="glass-card p-6 relative flex flex-col items-start group hover:bg-white/5 col-span-1 md:col-span-2 flex-row items-center gap-4">
+                    <div class="icon-box bg-gradient-to-br from-red-600 to-rose-700 mb-0 shrink-0">
+                        <i class="fa-brands fa-youtube"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold group-hover:text-red-500 transition">도전골퍼 조민서</h3>
+                        <p class="text-xs text-gray-400">KPGA 프로의 코딩 도전기 & 브이로그</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-right ml-auto text-gray-500 group-hover:translate-x-1 transition"></i>
+                </a>
+
+            </main>
+
+            <footer class="mt-12 text-center text-xs text-gray-600 font-light tracking-widest">
+                DESIGNED BY MINSEO CHO &copy; 2026
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        const container = document.getElementById('tiltContainer');
+        const inner = document.getElementById('tiltInner');
+
+        // PC: 마우스 움직임 감지
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.pageX) / 20; // 민감도 조절 (숫자가 클수록 덜 움직임)
+            const y = (window.innerHeight / 2 - e.pageY) / 20;
+            
+            // 너무 많이 꺾이지 않게 제한 (최대 10도)
+            const rotateX = Math.max(-10, Math.min(10, y));
+            const rotateY = Math.max(-10, Math.min(10, -x)); // 좌우 반전
+
+            inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        // 모바일: 자이로센서 감지
+        window.addEventListener('deviceorientation', (e) => {
+            if (e.beta && e.gamma) {
+                const x = e.gamma / 1.5; // 좌우
+                const y = e.beta / 1.5 - 30; // 상하 (기본 각도 보정)
+                inner.style.transform = `rotateX(${y}deg) rotateY(${x}deg)`;
+            }
+        });
+    </script>
 </body>
 </html>
